@@ -1,2 +1,4 @@
-let age = 30;
-console.log(age);
+const firstName = 'mario';
+const age = 30;
+
+console.log(firstName, age);
