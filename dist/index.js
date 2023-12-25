@@ -1,33 +1,27 @@
 "use strict";
 //____________________
-//extending interfaces
+//extending type aliases
 //____________________
-const user = {
+const person1 = {
     id: 1,
-    format() {
-        return `this user has an id of ${this.id}`;
-    },
+    firstName: 'mario',
 };
-const bill = {
+const person2 = {
     id: 2,
-    amount: 50,
-    server: 'mario',
-    //extends so this will require a format function
-    format() {
-        return `Bill with id${this.id} has $${this.amount} to pay`;
-    },
+    firstName: 'Yoshi',
+    //required since User extends the Person other type
+    email: 'Yoshi@Yoshi.com',
 };
-function printFormatted(val) {
-    console.log(val.format());
+//does not conform to either type
+const person3 = {
+    email: 'peach@peach.com',
+};
+function printUser(user) {
+    console.log(user.id, user.email, user.firstName);
 }
-function printBill(bill) {
-    console.log('server:', bill.server);
-    console.log(bill.format);
-}
+//not valid -> no email property
+// printUser(person1)
+//not valid ->
+// printUser(person3)
 //valid
-printFormatted(user);
-printFormatted(bill);
-//error user does not conform to bill interface
-// printBill(user)
-//valid -> bill object conforms to bill interface
-printBill(bill);
+printUser(person2);

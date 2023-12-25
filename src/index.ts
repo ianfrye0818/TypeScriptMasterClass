@@ -1,51 +1,42 @@
 //____________________
-//extending interfaces
+//extending type aliases
 //____________________
 
-interface HasFormatter {
-  format(): string;
-}
-
-// any properties included in HasFormatter are avail in bill when extended
-interface Bill extends HasFormatter {
+type Person = {
   id: string | number;
-  amount: number;
-  server: string;
-}
+  firstName: string;
+};
 
-const user = {
+//extending
+type User = Person & {
+  email: string;
+};
+
+const person1: Person = {
   id: 1,
-  format(): string {
-    return `this user has an id of ${this.id}`;
-  },
+  firstName: 'mario',
 };
 
-const bill: Bill = {
+const person2: User = {
   id: 2,
-  amount: 50,
-  server: 'mario',
+  firstName: 'Yoshi',
 
-  //extends so this will require a format function
-  format(): string {
-    return `Bill with id${this.id} has $${this.amount} to pay`;
-  },
+  //required since User extends the Person other type
+  email: 'Yoshi@Yoshi.com',
 };
 
-function printFormatted(val: HasFormatter): void {
-  console.log(val.format());
-}
+//does not conform to either type
+const person3 = {
+  email: 'peach@peach.com',
+};
 
-function printBill(bill: Bill): void {
-  console.log('server:', bill.server);
-  console.log(bill.format);
+function printUser(user: User) {
+  console.log(user.id, user.email, user.firstName);
 }
+//not valid -> no email property
+// printUser(person1)
+//not valid ->
+// printUser(person3)
 
 //valid
-printFormatted(user);
-printFormatted(bill);
-
-//error user does not conform to bill interface
-// printBill(user)
-
-//valid -> bill object conforms to bill interface
-printBill(bill);
+printUser(person2);
