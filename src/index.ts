@@ -1,18 +1,44 @@
-//tuples
-let person: [string, number, boolean] = ['mario', 34, true];
-
-let hslaColor: [number, string, string, number];
-hslaColor = [200, '100%', '65%', 67];
-
-let xyCoords: [number, number];
-xyCoords = [94.7, 20.1];
-
-function userCoords(): [number, number] {
-  return [34.2, 38.8];
+//interfaces
+interface Author {
+  name: string;
+  avatar: string;
 }
-const [lat, long] = userCoords();
 
-//named tuples
-let user: [name: string, age: number];
-user = ['bob', 34];
-console.log(user[0]);
+const authorOne: Author = {
+  name: 'Mario',
+  avatar: './images//mario.png',
+};
+
+interface Post {
+  title: string;
+  body: string;
+  tags: string[];
+  createAt: Date;
+  author: Author;
+}
+
+const newPost = {
+  title: 'My new post',
+  body: 'Something intereseting',
+  tags: ['gaming'],
+  createAt: new Date(),
+  author: authorOne,
+};
+//as funtion argument types
+function createPost(post: Post): void {
+  console.log(`created post ${post.title} by ${post.author.name}`);
+}
+
+createPost(newPost);
+
+//with arrays
+let posts: Post[] = [];
+
+posts.push({
+  title: 'my second post',
+  body: 'again something interesting',
+  tags: ['bookkeeping'],
+  createAt: new Date(),
+  author: authorOne,
+});
+console.log(posts[0].body);
