@@ -1,27 +1,26 @@
 "use strict";
 //____________________
-//extending type aliases
+//  making a class
 //____________________
-const person1 = {
-    id: 1,
-    firstName: 'mario',
-};
-const person2 = {
-    id: 2,
-    firstName: 'Yoshi',
-    //required since User extends the Person other type
-    email: 'Yoshi@Yoshi.com',
-};
-//does not conform to either type
-const person3 = {
-    email: 'peach@peach.com',
-};
-function printUser(user) {
-    console.log(user.id, user.email, user.firstName);
+class Pizza {
+    constructor(title, price) {
+        this.base = 'classic';
+        this.toppings = [];
+        this.title = title;
+        this.price = price;
+    }
+    addTopping(topping) {
+        this.toppings.push(topping);
+    }
+    removeToppings(topping) {
+        this.toppings = this.toppings.filter((t) => t !== topping);
+    }
+    selectBase(b) {
+        this.base = b;
+    }
 }
-//not valid -> no email property
-// printUser(person1)
-//not valid ->
-// printUser(person3)
-//valid
-printUser(person2);
+const pizza = new Pizza('Mario Special', 4.99);
+pizza.addTopping('mushrooms');
+pizza.addTopping('olives');
+pizza.selectBase('thin');
+console.log(`${pizza.title}: $${pizza.price}, (${pizza.base}) has ${pizza.toppings.join(', ')} for toppings`);

@@ -1,42 +1,40 @@
 //____________________
-//extending type aliases
+//  making a class
 //____________________
 
-type Person = {
-  id: string | number;
-  firstName: string;
-};
+type Base = 'classic' | 'thick' | 'thin' | 'garlic';
 
-//extending
-type User = Person & {
-  email: string;
-};
+class Pizza {
+  title: string;
+  price: number;
+  base: Base = 'classic';
+  toppings: string[] = [];
+  constructor(title: string, price: number) {
+    this.title = title;
+    this.price = price;
+  }
 
-const person1: Person = {
-  id: 1,
-  firstName: 'mario',
-};
+  addTopping(topping: string): void {
+    this.toppings.push(topping);
+  }
 
-const person2: User = {
-  id: 2,
-  firstName: 'Yoshi',
+  removeToppings(topping: string): void {
+    this.toppings = this.toppings.filter((t) => t !== topping);
+  }
 
-  //required since User extends the Person other type
-  email: 'Yoshi@Yoshi.com',
-};
-
-//does not conform to either type
-const person3 = {
-  email: 'peach@peach.com',
-};
-
-function printUser(user: User) {
-  console.log(user.id, user.email, user.firstName);
+  selectBase(b: Base): void {
+    this.base = b;
+  }
 }
-//not valid -> no email property
-// printUser(person1)
-//not valid ->
-// printUser(person3)
 
-//valid
-printUser(person2);
+const pizza = new Pizza('Mario Special', 4.99);
+
+pizza.addTopping('mushrooms');
+pizza.addTopping('olives');
+pizza.selectBase('thin');
+
+console.log(
+  `${pizza.title}: $${pizza.price}, (${pizza.base}) has ${pizza.toppings.join(
+    ', '
+  )} for toppings`
+);
