@@ -1,33 +1,18 @@
-//------------------
-// arrays
-//------------------
-let names: string[] = ['Mario', 'Lugigi', 'Peach'];
-let ages: number[] = [34, 23, 25];
+//tuples
+let person: [string, number, boolean] = ['mario', 34, true];
 
-//can only push types declared above
-names.push('Toad');
-ages.push(34);
+let hslaColor: [number, string, string, number];
+hslaColor = [200, '100%', '65%', 67];
 
-//type inferrence w/ arrays
-let fruits = ['apples', 'pears', 'bananas', 'mangos'];
-fruits.push('mango');
+let xyCoords: [number, number];
+xyCoords = [94.7, 20.1];
 
-const f = fruits[3];
+function userCoords(): [number, number] {
+  return [34.2, 38.8];
+}
+const [lat, long] = userCoords();
 
-//inferrs a union type
-let things = [1, true, 'hello'];
-
-//does not know exactly what type things is -> can be one of the types above
-const t = things[0];
-
-//------------------
-//object literals
-//--------------------
-
-let user: {} = {
-  name: 'Ian',
-  age: 37,
-  id: 1,
-};
-
-//type inference with object literals
+//named tuples
+let user: [name: string, age: number];
+user = ['bob', 34];
+console.log(user[0]);
