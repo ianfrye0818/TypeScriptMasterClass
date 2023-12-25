@@ -1,65 +1,51 @@
-//------------------
-//function signatures
-//------------------
+//____________________
+//extending interfaces
+//____________________
 
-//define the argument and then define the return type
-type Calculator = (numOne: number, numTwo: number) => number;
-
-//conforms type Calculator
-function addTwoNumbers(a: number, b: number) {
-  return a + b;
-}
-//conforms type Calculator
-function multipyTwoNumbers(first: number, second: number) {
-  return first * second;
+interface HasFormatter {
+  format(): string;
 }
 
-//does conform to calculator -> return and at least one of the arugments are the cooret type
-function squareNumber(num: number) {
-  return num * num;
-}
-//does not conform to Calculator -> arguments are a string
-function convertToNumber(str: string) {
-  return parseInt(str);
-}
-//does not conform to Calculator -> returning a string
-function joinTwoNumbers(numOne: number, numTwo: number) {
-  return `${numOne}${numTwo}`;
+// any properties included in HasFormatter are avail in bill when extended
+interface Bill extends HasFormatter {
+  id: string | number;
+  amount: number;
+  server: string;
 }
 
-let calcs: Calculator[] = [];
+const user = {
+  id: 1,
+  format(): string {
+    return `this user has an id of ${this.id}`;
+  },
+};
+
+const bill: Bill = {
+  id: 2,
+  amount: 50,
+  server: 'mario',
+
+  //extends so this will require a format function
+  format(): string {
+    return `Bill with id${this.id} has $${this.amount} to pay`;
+  },
+};
+
+function printFormatted(val: HasFormatter): void {
+  console.log(val.format());
+}
+
+function printBill(bill: Bill): void {
+  console.log('server:', bill.server);
+  console.log(bill.format);
+}
 
 //valid
-calcs.push(addTwoNumbers);
-calcs.push(multipyTwoNumbers);
-calcs.push(squareNumber);
+printFormatted(user);
+printFormatted(bill);
 
-//not valid:
-// calcs.push(joinTwoNumbers)
-// calcs.push(convertToNumber)
+//error user does not conform to bill interface
+// printBill(user)
 
-//------------------
-//function signatures on interfaces
-//------------------
-
-interface HasArea {
-  name: string;
-  calcArea: (a: number) => number;
-}
-
-const shapeOne: HasArea = {
-  name: 'square',
-  calcArea(l: number): number {
-    return l * l;
-  },
-};
-
-const shapeTwo: HasArea = {
-  name: 'circle',
-  calcArea(r: number): number {
-    return (Math.PI * r) ^ 2;
-  },
-};
-
-console.log(shapeOne.calcArea(3));
-console.log(shapeTwo.calcArea(4));
+//valid -> bill object conforms to bill interface
+printBill(bill);

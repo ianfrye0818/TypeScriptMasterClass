@@ -1,43 +1,33 @@
 "use strict";
-//------------------
-//function signatures
-//------------------
-//conforms type Calculator
-function addTwoNumbers(a, b) {
-    return a + b;
+//____________________
+//extending interfaces
+//____________________
+const user = {
+    id: 1,
+    format() {
+        return `this user has an id of ${this.id}`;
+    },
+};
+const bill = {
+    id: 2,
+    amount: 50,
+    server: 'mario',
+    //extends so this will require a format function
+    format() {
+        return `Bill with id${this.id} has $${this.amount} to pay`;
+    },
+};
+function printFormatted(val) {
+    console.log(val.format());
 }
-//conforms type Calculator
-function multipyTwoNumbers(first, second) {
-    return first * second;
+function printBill(bill) {
+    console.log('server:', bill.server);
+    console.log(bill.format);
 }
-//does conform to calculator -> return and at least one of the arugments are the cooret type
-function squareNumber(num) {
-    return num * num;
-}
-//does not conform to Calculator -> arguments are a string
-function convertToNumber(str) {
-    return parseInt(str);
-}
-//does not conform to Calculator -> returning a string
-function joinTwoNumbers(numOne, numTwo) {
-    return `${numOne}${numTwo}`;
-}
-let calcs = [];
 //valid
-calcs.push(addTwoNumbers);
-calcs.push(multipyTwoNumbers);
-calcs.push(squareNumber);
-const shapeOne = {
-    name: 'square',
-    calcArea(l) {
-        return l * l;
-    },
-};
-const shapeTwo = {
-    name: 'circle',
-    calcArea(r) {
-        return (Math.PI * r) ^ 2;
-    },
-};
-console.log(shapeOne.calcArea(3));
-console.log(shapeTwo.calcArea(4));
+printFormatted(user);
+printFormatted(bill);
+//error user does not conform to bill interface
+// printBill(user)
+//valid -> bill object conforms to bill interface
+printBill(bill);
