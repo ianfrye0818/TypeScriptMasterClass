@@ -1,34 +1,31 @@
-//type aliases
+//union types
 
-//example 1 - tuple
-type rgb = [number, number, number];
+let someId: number | string;
 
-function getRandomColor(): rgb {
-  const r = Math.floor(Math.random() * 255);
-  const g = Math.floor(Math.random() * 255);
-  const b = Math.floor(Math.random() * 255);
+someId = 1;
+someId = '2';
 
-  return [r, g, b];
+let email: string | null;
+
+email: null;
+email: 'Ian@ian.com';
+
+type Id = number | string;
+
+let anotherId: Id;
+
+anotherId = '1234;oiwevj8923';
+anotherId = 234239729387;
+
+//union type downfalls
+
+function swapIdType(id: Id): Id {
+  //valid parse int code:
+  parseInt('4');
+
+  // can only use methods that are common between all types
+
+  //not valid as typescript does not know this will for sure be a string
+  // parseInt(id)
+  return id;
 }
-const colorOne = getRandomColor();
-const colorTwo = getRandomColor();
-
-console.log(colorOne, colorTwo);
-
-//example 2 - object literal
-type User = {
-  name: string;
-  score: number;
-};
-
-const user1: User = {
-  name: 'mario',
-  score: 75,
-};
-
-function formatUser(user: User): void {
-  console.log(`Name ${user.name} has a score of: ${user.score}`);
-}
-
-formatUser(user1);
-formatUser({ name: 'Yoshi', score: 100 });

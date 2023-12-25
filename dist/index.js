@@ -1,20 +1,20 @@
 "use strict";
-//type aliases
-function getRandomColor() {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return [r, g, b];
+//union types
+let someId;
+someId = 1;
+someId = '2';
+let email;
+email: null;
+email: 'Ian@ian.com';
+let anotherId;
+anotherId = '1234;oiwevj8923';
+anotherId = 234239729387;
+//union type downfalls
+function swapIdType(id) {
+    //valid parse int code:
+    parseInt('4');
+    // can only use methods that are common between all types
+    //not valid as typescript does not know this will for sure be a string
+    // parseInt(id)
+    return id;
 }
-const colorOne = getRandomColor();
-const colorTwo = getRandomColor();
-console.log(colorOne, colorTwo);
-const user1 = {
-    name: 'mario',
-    score: 75,
-};
-function formatUser(user) {
-    console.log(`Name ${user.name} has a score of: ${user.score}`);
-}
-formatUser(user1);
-formatUser({ name: 'Yoshi', score: 100 });
