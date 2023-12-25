@@ -1,44 +1,35 @@
-//interfaces
-interface Author {
-  name: string;
-  avatar: string;
+//reusable interface
+
+interface hasQuantity {
+  quantity: number;
+}
+//must match exactly
+const something: hasQuantity = { quantity: 50 };
+
+function printQuantity(item: hasQuantity): void {
+  console.log(`the quantity of the item is ${item.quantity}`);
 }
 
-const authorOne: Author = {
-  name: 'Mario',
-  avatar: './images//mario.png',
+const fruit = {
+  name: 'mango',
+  quantity: 50,
+};
+const vehicle = {
+  name: 'car',
+  quantity: 3,
+};
+const person = {
+  name: 'mario',
+  quantity: 30,
+  age: 30,
 };
 
-interface Post {
-  title: string;
-  body: string;
-  tags: string[];
-  createAt: Date;
-  author: Author;
-}
+//as long as it inclues the properties of the interface - it will accept it
+printQuantity(fruit);
+printQuantity(vehicle);
+printQuantity(person);
 
-const newPost = {
-  title: 'My new post',
-  body: 'Something intereseting',
-  tags: ['gaming'],
-  createAt: new Date(),
-  author: authorOne,
-};
-//as funtion argument types
-function createPost(post: Post): void {
-  console.log(`created post ${post.title} by ${post.author.name}`);
-}
+//edge cases
 
-createPost(newPost);
-
-//with arrays
-let posts: Post[] = [];
-
-posts.push({
-  title: 'my second post',
-  body: 'again something interesting',
-  tags: ['bookkeeping'],
-  createAt: new Date(),
-  author: authorOne,
-});
-console.log(posts[0].body);
+//object literals cannot have extra properites
+// printQuantity({quantity: 30, age: 30})

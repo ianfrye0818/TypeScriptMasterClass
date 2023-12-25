@@ -1,27 +1,27 @@
 "use strict";
-const authorOne = {
-    name: 'Mario',
-    avatar: './images//mario.png',
-};
-const newPost = {
-    title: 'My new post',
-    body: 'Something intereseting',
-    tags: ['gaming'],
-    createAt: new Date(),
-    author: authorOne,
-};
-//as funtion argument types
-function createPost(post) {
-    console.log(`created post ${post.title} by ${post.author.name}`);
+//reusable interface
+//must match exactly
+const something = { quantity: 50 };
+function printQuantity(item) {
+    console.log(`the quantity of the item is ${item.quantity}`);
 }
-createPost(newPost);
-//with arrays
-let posts = [];
-posts.push({
-    title: 'my second post',
-    body: 'again something interesting',
-    tags: ['bookkeeping'],
-    createAt: new Date(),
-    author: authorOne,
-});
-console.log(posts[0].body);
+const fruit = {
+    name: 'mango',
+    quantity: 50,
+};
+const vehicle = {
+    name: 'car',
+    quantity: 3,
+};
+const person = {
+    name: 'mario',
+    quantity: 30,
+    age: 30,
+};
+//as long as it inclues the properties of the interface - it will accept it
+printQuantity(fruit);
+printQuantity(vehicle);
+printQuantity(person);
+//edge cases
+//object literals cannot have extra properites
+// printQuantity({quantity: 30, age: 30})
