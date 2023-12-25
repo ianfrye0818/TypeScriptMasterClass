@@ -1,27 +1,43 @@
 "use strict";
-//reusable interface
-//must match exactly
-const something = { quantity: 50 };
-function printQuantity(item) {
-    console.log(`the quantity of the item is ${item.quantity}`);
+//------------------
+//function signatures
+//------------------
+//conforms type Calculator
+function addTwoNumbers(a, b) {
+    return a + b;
 }
-const fruit = {
-    name: 'mango',
-    quantity: 50,
+//conforms type Calculator
+function multipyTwoNumbers(first, second) {
+    return first * second;
+}
+//does conform to calculator -> return and at least one of the arugments are the cooret type
+function squareNumber(num) {
+    return num * num;
+}
+//does not conform to Calculator -> arguments are a string
+function convertToNumber(str) {
+    return parseInt(str);
+}
+//does not conform to Calculator -> returning a string
+function joinTwoNumbers(numOne, numTwo) {
+    return `${numOne}${numTwo}`;
+}
+let calcs = [];
+//valid
+calcs.push(addTwoNumbers);
+calcs.push(multipyTwoNumbers);
+calcs.push(squareNumber);
+const shapeOne = {
+    name: 'square',
+    calcArea(l) {
+        return l * l;
+    },
 };
-const vehicle = {
-    name: 'car',
-    quantity: 3,
+const shapeTwo = {
+    name: 'circle',
+    calcArea(r) {
+        return (Math.PI * r) ^ 2;
+    },
 };
-const person = {
-    name: 'mario',
-    quantity: 30,
-    age: 30,
-};
-//as long as it inclues the properties of the interface - it will accept it
-printQuantity(fruit);
-printQuantity(vehicle);
-printQuantity(person);
-//edge cases
-//object literals cannot have extra properites
-// printQuantity({quantity: 30, age: 30})
+console.log(shapeOne.calcArea(3));
+console.log(shapeTwo.calcArea(4));
